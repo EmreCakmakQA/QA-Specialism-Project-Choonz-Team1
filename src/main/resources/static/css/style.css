@@ -18,11 +18,22 @@ body {
 
 }
 
+.logo{
+  border-radius: 10px;
+  background-color: black;
+  padding: 2px;
+}
+
+.heading{
+  margin-top: 20px;
+
+}
+
 #Search {
   background-color: white;
   color: black;
   border: 2px solid grey;
-  border-radius: 3px;  // for no radius
+  border-radius: 3px; 
 
   }
 
@@ -31,3 +42,32 @@ body {
   color: white;
 
 }
+
+#tracks{
+  margin-top: 80px;
+  background-color: grey;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#card{
+  background-color: #3a423c;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  color: aliceblue;
+  text-align: center;
+  border: 1px solid ivory;
+}
+
+#addToPlaylistBtn{
+  border: ivory 1px solid;
+  border-radius: 30px;
+}
+
+#addToPlaylistBtn:hover{
+  background-color: gray; 
+  
+}
+
+
