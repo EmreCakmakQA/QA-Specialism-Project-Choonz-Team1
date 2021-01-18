@@ -10,11 +10,10 @@ This should be scaleable from 3 to 5+ entities:
 
 - **MUST HAVE** - Track, Artist, Album
 - **COULD HAVE** - Genre, Playlist
-- Others TBD
+- Others TBD 
 
 ## Specifications
 
-The current idea as of 23-Sep-2020 is to release iterative specifications for this project, with varying degrees of functionality which the client/PO will want.
 
 These are TBD for now, but will be included here within a `_documentation` folder in due course.
 
@@ -46,3 +45,4 @@ TBD
 ## Acknowledgements
 
 - Probably not needed currently, but teams may wish to credit those outside the academy/stackoverflow users/reddit posts/whatever else they've used here
+# TeamChoonzQA-Project-3# QA-Specialism-Project-Choonz-Team1

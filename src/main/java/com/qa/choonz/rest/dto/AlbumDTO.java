@@ -55,8 +55,8 @@ public class AlbumDTO {
         this.tracks = tracks;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public String getArtist() {
+        return artist.getName();
     }
 
     public void setArtist(Artist artist) {
