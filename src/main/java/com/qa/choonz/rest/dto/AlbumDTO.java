@@ -63,8 +63,8 @@ public class AlbumDTO {
         this.artist = artist;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public String getGenre() {
+        return genre.getName();
     }
 
     public void setGenre(Genre genre) {
