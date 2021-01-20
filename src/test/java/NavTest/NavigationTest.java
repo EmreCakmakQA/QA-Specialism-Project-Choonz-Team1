@@ -39,7 +39,7 @@ public class NavigationTest {
     assertEquals("Choonz Music", driver.getTitle());	
    
   }
-  @Test
+  @Test 
   public void nav3() {
 	  
     driver.get("http://localhost:8082/");
