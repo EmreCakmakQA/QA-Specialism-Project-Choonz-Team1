@@ -23,44 +23,33 @@ public class ReadTests {
     driver.quit();
   }
   @Test
-  public void Tracks() {
+  public void ReggaePlaylist() {
 	  
     driver.get("http://localhost:8082/");
     driver.manage().window().setSize(new Dimension(1039, 1112));
-    driver.findElement(By.linkText("Featured Tracks")).click();
-    assertEquals("Choonz Tracks", driver.getTitle());
+    driver.findElement(By.linkText("Reggae")).click();
+    assertEquals("Choonz Playlist", driver.getTitle());
+    driver.findElement(By.linkText("One Love"));
+    
   }
   @Test
-  public void Artists() {
+  public void RockPlaylist() {
 	  
     driver.get("http://localhost:8082/");
     driver.manage().window().setSize(new Dimension(1039, 1112));
-    driver.findElement(By.linkText("Artists"));
-    assertEquals("Choonz Music", driver.getTitle());	
-   
-  }
-  @Test 
-  public void Playlists() {
-	  
-    driver.get("http://localhost:8082/");
-    driver.findElement(By.linkText("Top Playlists")).click();
-    assertEquals("Choonz Playlists", driver.getTitle());
-   
+    driver.findElement(By.linkText("Rock")).click();
+    assertEquals("Choonz Playlist", driver.getTitle());
+    driver.findElement(By.linkText("One Love"));
+    
   }
   @Test
-  public void Albums() {
-	  
-	    driver.get("http://localhost:8082/");
-	    driver.findElement(By.linkText("Albums")).click();
-	    assertEquals("Choonz Albums", driver.getTitle());
-	  }
-  @Test
-  public void LogoNav() {
+  public void PopPlaylist() {
 	  
     driver.get("http://localhost:8082/");
     driver.manage().window().setSize(new Dimension(1039, 1112));
-    assertEquals("Choonz Music", driver.getTitle());	
-   
+    driver.findElement(By.linkText("Pop")).click();
+    assertEquals("Choonz Playlist", driver.getTitle());
+    driver.findElement(By.linkText("One Love"));
+    
   }
-  
 }
