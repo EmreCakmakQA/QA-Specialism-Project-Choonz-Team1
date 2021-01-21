@@ -20,10 +20,10 @@ public class NavigationTest {
   }
   @After
   public void tearDown() {
-    //driver.quit();
+    driver.quit();
   }
   @Test
-  public void navigation() {
+  public void Tracks() {
 	  
     driver.get("http://localhost:8082/");
     driver.manage().window().setSize(new Dimension(1039, 1112));
@@ -31,7 +31,7 @@ public class NavigationTest {
     assertEquals("Choonz Tracks", driver.getTitle());
   }
   @Test
-  public void nav2() {
+  public void Artists() {
 	  
     driver.get("http://localhost:8082/");
     driver.manage().window().setSize(new Dimension(1039, 1112));
@@ -40,7 +40,7 @@ public class NavigationTest {
    
   }
   @Test 
-  public void nav3() {
+  public void Playlists() {
 	  
     driver.get("http://localhost:8082/");
     driver.findElement(By.linkText("Top Playlists")).click();
@@ -48,11 +48,19 @@ public class NavigationTest {
    
   }
   @Test
-  public void nav4() {
+  public void Albums() {
 	  
 	    driver.get("http://localhost:8082/");
 	    driver.findElement(By.linkText("Albums")).click();
 	    assertEquals("Choonz Albums", driver.getTitle());
 	  }
+  @Test
+  public void LogoNav() {
+	  
+    driver.get("http://localhost:8082/");
+    driver.manage().window().setSize(new Dimension(1039, 1112));
+    assertEquals("Choonz Music", driver.getTitle());	
+   
+  }
   
 }
