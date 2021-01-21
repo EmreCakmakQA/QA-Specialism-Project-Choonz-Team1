@@ -41,11 +41,12 @@ public class Genre {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Track> tracks;
 
-	public Genre(long id, String name, String description) {
+	public Genre(long id, String name, String description, List<Track> tracks) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.tracks = tracks;
 	}
 
 	public Genre(String name, String description) {

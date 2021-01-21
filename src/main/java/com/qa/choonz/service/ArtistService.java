@@ -44,11 +44,10 @@ public class ArtistService {
         return this.mapToDTO(found);
     }
 
-    public ArtistDTO update(Artist artist, long id) {
+    public ArtistDTO update(ArtistDTO artistDTO, long id) {
         Artist toUpdate = this.repo.findById(id).orElseThrow(ArtistNotFoundException::new);
-        toUpdate.setName(artist.getName());
-        toUpdate.setAlbums(artist.getAlbums());
-        BeanUtils.mergeNotNull(artist, toUpdate);
+        toUpdate.setName(artistDTO.getName());
+        BeanUtils.mergeNotNull(artistDTO, toUpdate);
         Artist updated = this.repo.save(toUpdate);
         return this.mapToDTO(updated);
     }

@@ -38,12 +38,12 @@ public class AlbumController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<AlbumDTO>> read() {
+    public ResponseEntity<List<AlbumDTO>> readAll() {
         return new ResponseEntity<List<AlbumDTO>>(this.service.readAll(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<AlbumDTO> read(@PathVariable long id) {
+    public ResponseEntity<AlbumDTO> readOne(@PathVariable long id) {
         return new ResponseEntity<AlbumDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
