@@ -22,16 +22,22 @@ function createTrackCard() {
 
 
 
-        let name = document.createElement("p");
-        let artist = document.createElement("p");
-        let album = document.createElement("p");
-        let genre = document.createElement("p");
+        let name = document.createElement("a");
+        let artist = document.createElement("a");
+        let album = document.createElement("a");
+        let genre = document.createElement("a");
 
 
         name.innerText = track.track_name;
         artist.innerText = track.artist;
         album.innerText = track.album;
         genre.innerText = track.genre;
+
+
+        name.href = "./html/individualTrack.html"
+        artist.href = "./html/individualArtist.html"
+        album.href = "./html/individualAlbum.html"
+        genre.href = "./html/individualGenre.html"
 
 
         let addToPlaylistBtn = document.createElement("button");
