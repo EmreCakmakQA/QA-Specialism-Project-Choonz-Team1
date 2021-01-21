@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,45 +19,56 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Track {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(unique = true)
-    private String name;
+	@NotNull
+	@Size(max = 100)
+	@Column(unique = true)
+	private String name;
 
-    @ManyToOne
-    private Album album;
+	@JsonIgnore
+	@ManyToOne
+	private Album album;
 
-    @ManyToOne
-    private Playlist playlist;
+	@JsonIgnore
+	@ManyToOne
+	private Playlist playlist;
 
-    // in seconds
-    private int duration;
+	@JsonIgnore
+	@ManyToOne
+	private Artist artist;
 
-    private String lyrics;
+	@JsonIgnore
+	@ManyToOne
+	private Genre genre;
 
-    public Track(long id, String name, Album album, Playlist playlist, int duration, String lyrics) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.album = album;
-        this.playlist = playlist;
-        this.duration = duration;
-        this.lyrics = lyrics;
-    }
-    
-    public Track(String name, Album album, Playlist playlist, int duration,
-            String lyrics) {
-        super();
-        this.name = name;
-        this.album = album;
-        this.playlist = playlist;
-        this.duration = duration;
-        this.lyrics = lyrics;
-    }
+	// in seconds
+	private int duration;
+
+	private String lyrics;
+
+	public Track(long id, String name, Album album, Playlist playlist, int duration, Genre genre, String lyrics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.album = album;
+		this.playlist = playlist;
+		this.duration = duration;
+		this.genre = genre;
+		this.lyrics = lyrics;
+	}
+
+	public Track(String name, Album album, Playlist playlist, int duration, Genre genre, String lyrics) {
+		super();
+		this.name = name;
+		this.album = album;
+		this.playlist = playlist;
+		this.duration = duration;
+		this.genre = genre;
+		this.lyrics = lyrics;
+	}
 
 //    @Override
 //    public String toString() {

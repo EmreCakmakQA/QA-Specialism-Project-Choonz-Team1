@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,37 +23,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Playlist {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(unique = true)
-    private String name;
+	@NotNull
+	@Size(max = 100)
+	@Column(unique = true)
+	private String name;
 
-    @NotNull
-    @Size(max = 500)
-    @Column(unique = true)
-    private String description;
+	@NotNull
+	@Size(max = 500)
+	@Column(unique = true)
+	private String description;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Track> tracks;
+	@JsonIgnore
+	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Track> tracks;
 
-    public Playlist(long id, String name, String description, String artwork, List<Track> tracks) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.tracks = tracks;
-    }
-    
-    public Playlist(String name, String description, String artwork, List<Track> tracks) {
-        super();
-        this.name = name;
-        this.description = description;
-        this.tracks = tracks;
-    }
+	public Playlist(long id, String name, String description, String artwork, List<Track> tracks) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.tracks = tracks;
+	}
+
+	public Playlist(String name, String description, String artwork, List<Track> tracks) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.tracks = tracks;
+	}
 
 //    @Override
 //    public String toString() {
