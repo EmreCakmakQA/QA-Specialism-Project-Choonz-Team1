@@ -48,6 +48,7 @@ body {
   background-color: grey;
   border-radius: 10px;
   padding: 10px;
+  
 }
 
 #card{
@@ -69,5 +70,56 @@ body {
   background-color: gray; 
   
 }
+
+#playlistCards{
+  background-color: #3a423c;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  
+}
+
+#card{
+  padding: 30px;
+  margin: 20px;
+  background-repeat: no-repeat; 
+  background-size: 300px 200px;
+  border-radius: 10px;
+  display: inline-block;
+  
+    
+}
+
+#playlistName{
+  background-color: #3a423c; 
+  border-radius: 10px;
+  max-width: 100px;
+  display: inline-block;
+  padding: 5px;
+  transition: ease-in-out 0.1s;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#playlistName:hover{
+  background-color: grey;
+  opacity: 1;
+  padding: 8px;
+  
+}
+
+#playlistDesc{
+  padding: 2px 5px;
+  background-color: #3a423c;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+
+
 
 
