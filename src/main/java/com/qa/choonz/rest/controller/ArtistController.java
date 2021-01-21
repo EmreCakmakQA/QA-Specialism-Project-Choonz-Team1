@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,8 @@ import com.qa.choonz.rest.dto.ArtistDTO;
 import com.qa.choonz.service.ArtistService;
 
 @RestController
-@RequestMapping("/artists")
 @CrossOrigin
+@RequestMapping("/artists")
 public class ArtistController {
 
     private ArtistService service;
@@ -36,15 +37,15 @@ public class ArtistController {
 
     @GetMapping("/read")
     public ResponseEntity<List<ArtistDTO>> read() {
-        return new ResponseEntity<List<ArtistDTO>>(this.service.read(), HttpStatus.OK);
+        return new ResponseEntity<List<ArtistDTO>>(this.service.readAll(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
     public ResponseEntity<ArtistDTO> read(@PathVariable long id) {
-        return new ResponseEntity<ArtistDTO>(this.service.read(id), HttpStatus.OK);
+        return new ResponseEntity<ArtistDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ArtistDTO> update(@RequestBody Artist artist, @PathVariable long id) {
         return new ResponseEntity<ArtistDTO>(this.service.update(artist, id), HttpStatus.ACCEPTED);
     }
