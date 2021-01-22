@@ -42,12 +42,12 @@ public class PlaylistService {
         return this.mapToDTO(found);
     }
 
-    public PlaylistDTO update(Playlist playlist, long id) {
+    public PlaylistDTO update(PlaylistDTO playlistDTO, long id) {
         Playlist toUpdate = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
         toUpdate.setName(toUpdate.getName());
         toUpdate.setDescription(toUpdate.getDescription());
         toUpdate.setTracks(toUpdate.getTracks());
-        BeanUtils.mergeNotNull(playlist, toUpdate);
+        BeanUtils.mergeNotNull(playlistDTO, toUpdate);
         Playlist updated = this.repo.save(toUpdate);
         return this.mapToDTO(updated);
     }

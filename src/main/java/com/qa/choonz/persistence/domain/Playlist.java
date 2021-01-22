@@ -41,7 +41,7 @@ public class Playlist {
 	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Track> tracks;
 
-	public Playlist(long id, String name, String description, String artwork, List<Track> tracks) {
+	public Playlist(long id, String name, String description, List<Track> tracks) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -49,7 +49,7 @@ public class Playlist {
 		this.tracks = tracks;
 	}
 
-	public Playlist(String name, String description, String artwork, List<Track> tracks) {
+	public Playlist(String name, String description, List<Track> tracks) {
 		super();
 		this.name = name;
 		this.description = description;
