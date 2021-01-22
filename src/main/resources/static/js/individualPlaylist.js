@@ -1,181 +1,73 @@
-// Dummy Data
-let reggae = "./img/reggae.png"
-let rock = "./img/rock.png"
-let pop = "./img/pop.png"
+const params = new URLSearchParams(window.location.search);
 
-let testPlaylist1 = {
-    "id": 1,
-    "name": "Reggae",
-    "description": "A collection of Reggae music",
-    "artwork": reggae,
-    "tracks": [{
-        "id": 1,
-        "name": "One Love",
-        "artist": "Bob Marley",
-        "album": "Exodus",
-        "duration": 5,
-        "lyrics": "One love, one heart, lets get together and feel alright...",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 2,
-        "name": "Concrete Jungle",
-        "artist": "Bob Marley",
-        "album": "Exodus",
-        "duration": 5,
-        "lyrics": "No sun will shine in my day today,",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 3,
-        "name": "Satisfy My Soul",
-        "artist": "Bob Marley",
-        "album": "Exodus",
-        "duration": 5,
-        "lyrics": "One love, one heart, lets get together and feel alright...",
-        "trackURL": "./html/tracks.html"
-    }]
-}
-
-let testPlaylist2 = {
-    "id": 2,
-    "name": "Rock",
-    "description": "Rock 'n Roll for the Soul",
-    "artwork": rock,
-    "tracks": [{
-        "id": 1,
-        "name": "Highway To Hell",
-        "album": "ACDC Greatest Hits",
-        "artist": "ACDC",
-        "duration": 5,
-        "lyrics": "I'm on the highway to hell!",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 2,
-        "name": "Stairway To Heaven",
-        "album": "Greatest Hits: LZ",
-        "artist": "Led Zeppelin",
-        "duration": 5,
-        "lyrics": "and shes buying the stairway to heaven",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 3,
-        "name": "Back In Black",
-        "album": "ACDC Greatest Hits",
-        "artist": "ACDC",
-        "duration": 5,
-        "lyrics": "Cos I'm back in black, yes I'm back in black!",
-        "trackURL": "./html/tracks.html"
-    }]
-}
-
-let testPlaylist3 = {
-    "id": 3,
-    "name": "Pop",
-    "description": "Pop till you drop!",
-    "artwork": pop,
-    "tracks": [{
-        "id": 1,
-        "name": "Africa",
-        "artist": "Toto",
-        "album": "Toto's Greatest Hits",
-        "duration": 5,
-        "lyrics": "I bless the rains down in Africa",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 2,
-        "name": "I Feel It Coming",
-        "artist": "The Weekend",
-        "album": "The Weekend's Album",
-        "duration": 5,
-        "lyrics": "Tell me what you really like, we don't even have to fight, just take it step by step",
-        "trackURL": "./html/tracks.html"
-    },
-    {
-        "id": 3,
-        "name": "Smooth Criminal",
-        "artist": "Michael Jackson",
-        "album": "The Black Album",
-        "duration": 5,
-        "lyrics": "You've been hit by, you've been struck by a smooth criminal",
-        "trackURL": "./html/tracks.html"
-    }
-    ]
+// Obtains ID and passes it as a parameter to getData()
+for (let param of params) {
+    console.log("Object ID: " + param)
+    let id = param[1];
+    console.log(id);
+    getData(id)
 }
 
 
-// Playlist Array
+function getData(id) {
+    fetch('http://localhost:8082/playlists/read/' + id)
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                // Examine the text in the response
+                response.json().then(function (data) {
+                    console.log(data)
 
-let playlistsArray = [testPlaylist1, testPlaylist2, testPlaylist3];
+                    displayPlaylist(data)
 
-// Add tracks to page 
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+}
 
-let tracksDiv = document.querySelector("div#tracks");
-createTrackCard();
+function displayPlaylist(data) {
 
-function createTrackCard() {
+    let div = document.querySelector("div#playlist")
 
+    let heading = document.querySelector("h1#heading")
+    heading.innerText = data.name
 
+    let desc = data.description
+    let description = document.createElement("p")
+    description.innerText = desc
 
-    for (let i = 0; i < playlistsArray.length; i++) {
-        for (tracks of playlistsArray[i].tracks) {
+    div.appendChild(description)
 
-            let name = document.createElement("a");
-            let artist = document.createElement("a");
-            let album = document.createElement("a");
-            let genre = document.createElement("a");
+    let list = document.createElement("ul");
 
-            name.innerText = tracks.name;
-            artist.innerText = tracks.artist;
-            album.innerText = tracks.album;
+    for (let i = 0; i < data.tracks.length; i++) {
+        trackName = data.tracks[i].name
 
-            name.href = "./html/individualTrack.html"
-            artist.href = "./html/individualArtist.html"
-            album.href = "./html/individualAlbum.html"
+        let track = document.createElement("li")
+        track.innerText = trackName
 
-            let card = document.createElement("div");
-            card.setAttribute("id", "card")
-
-            card.appendChild(name)
-            card.appendChild(artist)
-            card.appendChild(album)
-
-            tracksDiv.append(card);
+        let btn = document.createElement("button")
+        btn.innerText = "view"
+        btn.setAttribute("class", "btn btn-primary btn-sm")
+        btn.onclick = () => {
+            console.log(data.tracks[i].id)
+            location.href = `individualTrack.html?id=${data.tracks[i].id}`
         }
 
 
-
-
-        // genre.href = "./html/individualGenre.html"
-
-
-        // let addToPlaylistBtn = document.createElement("button");
-        // addToPlaylistBtn.setAttribute("class", "btn")
-        // addToPlaylistBtn.setAttribute("id", "addToPlaylistBtn")
-        // addToPlaylistBtn.innerText = "💚"
-
-        // addToPlaylistBtn.addEventListener("mouseenter", (event) => {
-        //     event.target.innerText = "💗"
-        // })
-
-        // addToPlaylistBtn.addEventListener("mouseleave", (event) => {
-        //     event.target.innerText = "💚"
-        // })
-
-
-        // card.appendChild(genre)
-        // card.appendChild(addToPlaylistBtn);
-
-
-        // tracksDiv.append(card);
-
-
+        list.appendChild(track)
+        list.appendChild(btn)
 
     }
+
+    div.appendChild(list)
+
 }
-
-
 
