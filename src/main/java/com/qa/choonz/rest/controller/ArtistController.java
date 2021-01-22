@@ -41,13 +41,13 @@ public class ArtistController {
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<ArtistDTO> read(@PathVariable long id) {
+    public ResponseEntity<ArtistDTO> readOne(@PathVariable long id) {
         return new ResponseEntity<ArtistDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ArtistDTO> update(@RequestBody Artist artist, @PathVariable long id) {
-        return new ResponseEntity<ArtistDTO>(this.service.update(artist, id), HttpStatus.ACCEPTED);
+    public ResponseEntity<ArtistDTO> update(@RequestBody ArtistDTO artistDTO, @PathVariable long id) {
+        return new ResponseEntity<ArtistDTO>(this.service.update(artistDTO, id), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("delete/{id}")
