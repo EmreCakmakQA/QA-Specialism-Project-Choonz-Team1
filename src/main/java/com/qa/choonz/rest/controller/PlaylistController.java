@@ -36,18 +36,18 @@ public class PlaylistController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<PlaylistDTO>> read() {
+    public ResponseEntity<List<PlaylistDTO>> readAll() {
         return new ResponseEntity<List<PlaylistDTO>>(this.service.readAll(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<PlaylistDTO> read(@PathVariable long id) {
+    public ResponseEntity<PlaylistDTO> readOne(@PathVariable long id) {
         return new ResponseEntity<PlaylistDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PlaylistDTO> update(@RequestBody Playlist playlist, @PathVariable long id) {
-        return new ResponseEntity<PlaylistDTO>(this.service.update(playlist, id), HttpStatus.ACCEPTED);
+    public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO playlistDTO, @PathVariable long id) {
+        return new ResponseEntity<PlaylistDTO>(this.service.update(playlistDTO, id), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/{id}")

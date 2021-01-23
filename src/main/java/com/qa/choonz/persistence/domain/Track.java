@@ -69,6 +69,14 @@ public class Track {
 		this.genre = genre;
 		this.lyrics = lyrics;
 	}
+	
+	public Track(long id, String name, int duration, String lyrics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
 
 //    @Override
 //    public String toString() {
