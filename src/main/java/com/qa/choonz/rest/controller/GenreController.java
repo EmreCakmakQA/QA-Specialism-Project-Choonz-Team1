@@ -36,18 +36,18 @@ public class GenreController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<GenreDTO>> read() {
+    public ResponseEntity<List<GenreDTO>> readAll() {
         return new ResponseEntity<List<GenreDTO>>(this.service.readAll(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<GenreDTO> read(@PathVariable long id) {
+    public ResponseEntity<GenreDTO> readOne(@PathVariable long id) {
         return new ResponseEntity<GenreDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<GenreDTO> update(@RequestBody Genre genre, @PathVariable long id) {
-        return new ResponseEntity<GenreDTO>(this.service.update(genre, id), HttpStatus.ACCEPTED);
+    public ResponseEntity<GenreDTO> update(@RequestBody GenreDTO genreDTO, @PathVariable long id) {
+        return new ResponseEntity<GenreDTO>(this.service.update(genreDTO, id), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/{id}")

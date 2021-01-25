@@ -36,18 +36,18 @@ public class TrackController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<TrackDTO>> read() {
+    public ResponseEntity<List<TrackDTO>> readAll() {
         return new ResponseEntity<List<TrackDTO>>(this.service.readAll(), HttpStatus.OK);
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<TrackDTO> read(@PathVariable long id) {
+    public ResponseEntity<TrackDTO> readOne(@PathVariable long id) {
         return new ResponseEntity<TrackDTO>(this.service.readOne(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<TrackDTO> update(@RequestBody Track track, @PathVariable long id) {
-        return new ResponseEntity<TrackDTO>(this.service.update(track, id), HttpStatus.ACCEPTED);
+    public ResponseEntity<TrackDTO> update(@RequestBody TrackDTO trackDTO, @PathVariable long id) {
+        return new ResponseEntity<TrackDTO>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("delete/{id}")
