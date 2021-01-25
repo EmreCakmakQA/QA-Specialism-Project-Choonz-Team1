@@ -15,46 +15,46 @@ import com.qa.choonz.utils.BeanUtils;
 @Service
 public class PlaylistService {
 
-    private PlaylistRepository repo;
-    private ModelMapper mapper;
+	private PlaylistRepository repo;
+	private ModelMapper mapper;
 
-    private PlaylistDTO mapToDTO(Playlist playlist) {
-        return this.mapper.map(playlist, PlaylistDTO.class);
-    }
-    
-    public PlaylistService(PlaylistRepository repo, ModelMapper mapper) {
-        super();
-        this.repo = repo;
-        this.mapper = mapper;
-    }
+	private PlaylistDTO mapToDTO(Playlist playlist) {
+		return this.mapper.map(playlist, PlaylistDTO.class);
+	}
 
-    public PlaylistDTO create(Playlist playlist) {
-        Playlist created = this.repo.save(playlist);
-        return this.mapToDTO(created);
-    }
+	public PlaylistService(PlaylistRepository repo, ModelMapper mapper) {
+		super();
+		this.repo = repo;
+		this.mapper = mapper;
+	}
 
-    public List<PlaylistDTO> readAll() {
-        return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
+	public PlaylistDTO create(Playlist playlist) {
+		Playlist created = this.repo.save(playlist);
+		return this.mapToDTO(created);
+	}
 
-    public PlaylistDTO readOne(long id) {
-        Playlist found = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
-        return this.mapToDTO(found);
-    }
+	public List<PlaylistDTO> readAll() {
+		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	}
 
-    public PlaylistDTO update(PlaylistDTO playlistDTO, long id) {
-        Playlist toUpdate = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
-        toUpdate.setName(toUpdate.getName());
-        toUpdate.setDescription(toUpdate.getDescription());
-        toUpdate.setTracks(toUpdate.getTracks());
-        BeanUtils.mergeNotNull(playlistDTO, toUpdate);
-        Playlist updated = this.repo.save(toUpdate);
-        return this.mapToDTO(updated);
-    }
+	public PlaylistDTO readOne(long id) {
+		Playlist found = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
+		return this.mapToDTO(found);
+	}
 
-    public boolean delete(long id) {
-        this.repo.deleteById(id);
-        return !this.repo.existsById(id);
-    }
+	public PlaylistDTO update(PlaylistDTO playlistDTO, long id) {
+		Playlist toUpdate = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
+		toUpdate.setName(playlistDTO.getName());
+		toUpdate.setDescription(playlistDTO.getDescription());
+		toUpdate.setTracks(playlistDTO.getTracks());
+		BeanUtils.mergeNotNull(playlistDTO, toUpdate);
+		Playlist updated = this.repo.save(toUpdate);
+		return this.mapToDTO(updated);
+	}
+
+	public boolean delete(long id) {
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
+	}
 
 }
