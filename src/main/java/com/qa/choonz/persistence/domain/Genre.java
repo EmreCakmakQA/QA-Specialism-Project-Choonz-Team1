@@ -12,8 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,8 +36,9 @@ public class Genre {
 	@Column(unique = true)
 	private String description;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Track> tracks;
 
 	public Genre(long id, String name, String description, List<Track> tracks) {
@@ -48,11 +48,25 @@ public class Genre {
 		this.description = description;
 		this.tracks = tracks;
 	}
-
+	
+	public Genre(long id, String name, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
+	
 	public Genre(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
+	}
+	
+	public Genre(String name, String description, List<Track> tracks) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.tracks = tracks;
 	}
 
 //    @Override

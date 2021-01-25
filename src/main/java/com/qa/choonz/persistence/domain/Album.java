@@ -41,11 +41,45 @@ public class Album {
     @ManyToOne
     private Artist artist;
 
-
+    
     public Album(long id, String name) {
         super();
         this.id = id;
         this.name = name;
+    }
+    
+    public Album(long id, String name, List<Track> tracks) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.tracks = tracks;
+    }
+    
+    public Album(long id, String name, List<Track> tracks, Artist artist) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.tracks = tracks;
+        this.artist  = artist;
+    }
+    
+    public Album(String name, List<Track> tracks, Artist artist) {
+        super();
+        this.name = name;
+        this.tracks = tracks;
+        this.artist  = artist;
+    }
+    
+    public Album(String name, Artist artist) {
+        super();
+        this.name = name;
+        this.artist = artist;
+    }
+    
+    public Album(String name, List<Track> tracks) {
+        super();
+        this.name = name;
+        this.tracks = tracks;
     }
     
     public Album(String name) {
