@@ -55,6 +55,12 @@ public class Playlist {
 		this.description = description;
 		this.tracks = tracks;
 	}
+	
+	public Playlist(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
 
 //    @Override
 //    public String toString() {
