@@ -44,6 +44,21 @@ public class Artist {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Track> tracks;
 
+	public Artist(long id, String name, List<Album> albums, List<Track> tracks) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.albums = albums;
+		this.tracks = tracks;
+	}	
+	
+	public Artist(String name, List<Album> albums, List<Track> tracks) {
+		super();
+		this.name = name;
+		this.albums = albums;
+		this.tracks = tracks;
+	}	
+	
 	public Artist(long id, String name) {
 		super();
 		this.id = id;

@@ -1,6 +1,7 @@
 package com.qa.choonz.rest.dto;
 
 import com.qa.choonz.persistence.domain.Album;
+import com.qa.choonz.persistence.domain.Genre;
 import com.qa.choonz.persistence.domain.Playlist;
 
 import lombok.Data;
@@ -14,6 +15,7 @@ public class TrackDTO {
     private String name;
     private Album album;
     private Playlist playlist;
+	private Genre genre;
     private int duration;
     private String lyrics;
 }

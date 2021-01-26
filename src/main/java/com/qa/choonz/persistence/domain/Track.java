@@ -40,15 +40,17 @@ public class Track {
 	@ManyToOne
 	private Artist artist;
 
+	// in seconds
+	private int duration;
+	
 	@JsonIgnore
 	@ManyToOne
 	private Genre genre;
 
-	// in seconds
-	private int duration;
-
 	private String lyrics;
 
+
+	
 	public Track(long id, String name, Album album, Playlist playlist, int duration, Genre genre, String lyrics) {
 		super();
 		this.id = id;
@@ -73,6 +75,13 @@ public class Track {
 	public Track(long id, String name, int duration, String lyrics) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
+	
+	public Track(String name, int duration, String lyrics) {
+		super();
 		this.name = name;
 		this.duration = duration;
 		this.lyrics = lyrics;
