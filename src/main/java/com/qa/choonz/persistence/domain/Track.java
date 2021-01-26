@@ -79,6 +79,13 @@ public class Track {
 		this.duration = duration;
 		this.lyrics = lyrics;
 	}
+	
+	public Track(String name, int duration, String lyrics) {
+		super();
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
 
 //    @Override
 //    public String toString() {
