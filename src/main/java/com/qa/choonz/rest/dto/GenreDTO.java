@@ -1,8 +1,7 @@
 package com.qa.choonz.rest.dto;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.qa.choonz.persistence.domain.Track;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenreDTO {
 
-    private long id;
-    private String name;
-    private String description;
-	private List<Track> tracks;
+	private long id;
+	private String name;
+	private String description;
+	private List<TrackDTO> tracks = new ArrayList<>();
 
 }
