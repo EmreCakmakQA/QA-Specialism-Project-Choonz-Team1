@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -41,6 +42,10 @@ public class Playlist {
 	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Track> tracks;
 
+	@JsonIgnore
+	@ManyToOne
+	private User user;
+
 	public Playlist(long id, String name, String description, List<Track> tracks) {
 		super();
 		this.id = id;
@@ -55,7 +60,7 @@ public class Playlist {
 		this.description = description;
 		this.tracks = tracks;
 	}
-	
+
 	public Playlist(String name, String description) {
 		super();
 		this.name = name;

@@ -57,6 +57,21 @@ public class User {
 		this.password = password;
 	}
 
+	public User(long id, String name, String password, List<Playlist> playlists) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.playlists = playlists;
+	}
+
+	public User(String name, String password, List<Playlist> playlists) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.playlists = playlists;
+	}
+
 //    @Override
 //    public String toString() {
 //        StringBuilder builder = new StringBuilder();
