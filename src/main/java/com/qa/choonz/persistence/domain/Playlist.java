@@ -1,11 +1,11 @@
 package com.qa.choonz.persistence.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -46,17 +47,19 @@ public class Playlist {
 //	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //	private List<Track> tracks;
 
-	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "playlist_track", joinColumns = { @JoinColumn(name = "playlist_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "track_id") })
-	private Set<Track> tracks = new HashSet<>();
+//	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@MapsId("id")
+	@JoinTable(name = "playlist_track", joinColumns = @JoinColumn(name = "playlist_id") , inverseJoinColumns = 
+			@JoinColumn(name = "track_id"))
+	private List<Track> tracks;
+
 
 	@JsonIgnore
 	@ManyToOne
 	private User user;
 
-	public Playlist(long id, String name, String description, Set<Track> tracks) {
+	public Playlist(long id, String name, String description, List<Track> tracks) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,7 +67,7 @@ public class Playlist {
 		this.tracks = tracks;
 	}
 
-	public Playlist(String name, String description, Set<Track> tracks) {
+	public Playlist(String name, String description, List<Track> tracks) {
 		super();
 		this.name = name;
 		this.description = description;

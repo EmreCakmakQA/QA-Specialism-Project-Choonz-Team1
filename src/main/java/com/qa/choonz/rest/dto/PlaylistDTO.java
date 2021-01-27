@@ -1,6 +1,6 @@
 package com.qa.choonz.rest.dto;
 
-import java.util.Set;
+import java.util.List;
 
 import com.qa.choonz.persistence.domain.Track;
 
@@ -14,6 +14,6 @@ public class PlaylistDTO {
 	private long id;
 	private String name;
 	private String description;
-	private Set<Track> tracks;
+	private List<Track> tracks;
 
 }

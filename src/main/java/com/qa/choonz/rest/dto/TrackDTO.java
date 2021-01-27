@@ -1,6 +1,6 @@
 package com.qa.choonz.rest.dto;
 
-import java.util.Set;
+import java.util.List;
 
 import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.persistence.domain.Genre;
@@ -16,7 +16,7 @@ public class TrackDTO {
 	private long id;
 	private String name;
 	private Album album;
-	private Set<Playlist> playlists;
+	private List<Playlist> playlists;
 	private Genre genre;
 	private int duration;
 	private String lyrics;

@@ -8,9 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -76,7 +74,7 @@ class PlaylistControllerIntergrationTesting {
 	@Test
 	void updateTest() throws Exception {
 
-		Set<Track> tracks = new HashSet<>();
+		List<Track> tracks = new ArrayList<>();
 		PlaylistDTO playlistDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
 
@@ -97,7 +95,7 @@ class PlaylistControllerIntergrationTesting {
 	@Test
 	void updateRead1() throws Exception {
 
-		Set<Track> tracks = new HashSet<>();
+		List<Track> tracks = new ArrayList<>();
 
 		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
@@ -119,7 +117,7 @@ class PlaylistControllerIntergrationTesting {
 	// Read All test
 	@Test
 	void updateReadAll() throws Exception {
-		Set<Track> tracks = new HashSet<>();
+		List<Track> tracks = new ArrayList<>();
 		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		List<PlaylistDTO> listDTO = new ArrayList<>();
 		listDTO.add(playlistDTO);

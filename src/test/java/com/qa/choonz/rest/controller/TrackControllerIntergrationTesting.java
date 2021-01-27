@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.rest.dto.TrackDTO;
 
@@ -95,14 +96,16 @@ class TrackControllerIntergrationTesting {
 	@Test
 	void updateRead1() throws Exception {
 
-		TrackDTO trackDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail"));
+		List<Playlist> playlists = new ArrayList<>();
+		
+		TrackDTO trackDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail", playlists));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(trackDTO);
 
 		RequestBuilder request = get(URI + "/read/1").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
-		TrackDTO testSavedDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail"));
+		TrackDTO testSavedDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail", playlists));
 		testSavedDTO.setId(1L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
 
@@ -116,7 +119,9 @@ class TrackControllerIntergrationTesting {
 	@Test
 	void updateReadAll() throws Exception {
 
-		TrackDTO trackDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail"));
+		List<Playlist> playlists = new ArrayList<>();
+		
+		TrackDTO trackDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail", playlists));
 		List<TrackDTO> listDTO = new ArrayList<>();
 		listDTO.add(trackDTO);
 
@@ -126,7 +131,7 @@ class TrackControllerIntergrationTesting {
 
 		ResultMatcher checkStatus = status().isOk();
 
-		TrackDTO testSavedDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail"));
+		TrackDTO testSavedDTO = mapToDTO(new Track("Jailhouse Rock", 155, "The warden threw a party in the county jail", playlists));
 		List<TrackDTO> listSavedDTO = new ArrayList<>();
 		testSavedDTO.setId(1L);
 		listSavedDTO.add(testSavedDTO);
