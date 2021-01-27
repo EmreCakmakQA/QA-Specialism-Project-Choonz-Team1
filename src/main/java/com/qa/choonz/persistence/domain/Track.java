@@ -1,7 +1,6 @@
 package com.qa.choonz.persistence.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,7 +43,7 @@ public class Track {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "tracks")
-	private Set<Playlist> playlists = new HashSet<>();
+	private List<Playlist> playlists;
 
 	@JsonIgnore
 	@ManyToOne
@@ -59,7 +58,7 @@ public class Track {
 
 	private String lyrics;
 
-	public Track(long id, String name, Album album, Set<Playlist> playlists, int duration, Genre genre, String lyrics) {
+	public Track(long id, String name, Album album, List<Playlist> playlists, int duration, Genre genre, String lyrics) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,7 +69,7 @@ public class Track {
 		this.lyrics = lyrics;
 	}
 
-	public Track(String name, Album album, Set<Playlist> playlists, int duration, Genre genre, String lyrics) {
+	public Track(String name, Album album, List<Playlist> playlists, int duration, Genre genre, String lyrics) {
 		super();
 		this.name = name;
 		this.album = album;
@@ -89,10 +88,17 @@ public class Track {
 	}
 
 	public Track(String name, int duration, String lyrics) {
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
+	
+	public Track(String name, int duration, String lyrics, List<Playlist> playlists) {
 		super();
 		this.name = name;
 		this.duration = duration;
 		this.lyrics = lyrics;
+		this.playlists = playlists;
 	}
 
 //    @Override
