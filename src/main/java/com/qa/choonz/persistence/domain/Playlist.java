@@ -1,16 +1,19 @@
 package com.qa.choonz.persistence.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,6 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "playlist")
 @Data
 @NoArgsConstructor
 public class Playlist {
@@ -38,15 +42,21 @@ public class Playlist {
 	@Column(unique = true)
 	private String description;
 
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Track> tracks;
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Track> tracks;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "playlist_track", joinColumns = { @JoinColumn(name = "playlist_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "track_id") })
+	private Set<Track> tracks = new HashSet<>();
 
 	@JsonIgnore
 	@ManyToOne
 	private User user;
 
-	public Playlist(long id, String name, String description, List<Track> tracks) {
+	public Playlist(long id, String name, String description, Set<Track> tracks) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,7 +64,7 @@ public class Playlist {
 		this.tracks = tracks;
 	}
 
-	public Playlist(String name, String description, List<Track> tracks) {
+	public Playlist(String name, String description, Set<Track> tracks) {
 		super();
 		this.name = name;
 		this.description = description;

@@ -1,11 +1,16 @@
 package com.qa.choonz.persistence.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,6 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "track")
 @Data
 @NoArgsConstructor
 public class Track {
@@ -32,9 +38,13 @@ public class Track {
 	@ManyToOne
 	private Album album;
 
+//	@JsonIgnore
+//	@ManyToOne
+//	private Playlist playlist;
+
 	@JsonIgnore
-	@ManyToOne
-	private Playlist playlist;
+	@ManyToMany(mappedBy = "tracks")
+	private Set<Playlist> playlists = new HashSet<>();
 
 	@JsonIgnore
 	@ManyToOne
@@ -42,36 +52,34 @@ public class Track {
 
 	// in seconds
 	private int duration;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private Genre genre;
 
 	private String lyrics;
 
-
-	
-	public Track(long id, String name, Album album, Playlist playlist, int duration, Genre genre, String lyrics) {
+	public Track(long id, String name, Album album, Set<Playlist> playlists, int duration, Genre genre, String lyrics) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.album = album;
-		this.playlist = playlist;
+		this.playlists = playlists;
 		this.duration = duration;
 		this.genre = genre;
 		this.lyrics = lyrics;
 	}
 
-	public Track(String name, Album album, Playlist playlist, int duration, Genre genre, String lyrics) {
+	public Track(String name, Album album, Set<Playlist> playlists, int duration, Genre genre, String lyrics) {
 		super();
 		this.name = name;
 		this.album = album;
-		this.playlist = playlist;
+		this.playlists = playlists;
 		this.duration = duration;
 		this.genre = genre;
 		this.lyrics = lyrics;
 	}
-	
+
 	public Track(long id, String name, int duration, String lyrics) {
 		super();
 		this.id = id;
@@ -79,7 +87,7 @@ public class Track {
 		this.duration = duration;
 		this.lyrics = lyrics;
 	}
-	
+
 	public Track(String name, int duration, String lyrics) {
 		super();
 		this.name = name;

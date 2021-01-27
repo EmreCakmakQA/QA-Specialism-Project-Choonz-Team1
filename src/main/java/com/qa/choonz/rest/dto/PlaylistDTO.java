@@ -1,6 +1,6 @@
 package com.qa.choonz.rest.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import com.qa.choonz.persistence.domain.Track;
 
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlaylistDTO {
 
-    private long id;
-    private String name;
-    private String description;
-    private List<Track> tracks;
+	private long id;
+	private String name;
+	private String description;
+	private Set<Track> tracks;
 
 }

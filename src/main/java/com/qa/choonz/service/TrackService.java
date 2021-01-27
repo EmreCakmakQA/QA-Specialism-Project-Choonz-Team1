@@ -50,7 +50,7 @@ public class TrackService {
 		toUpdate.setAlbum(trackDTO.getAlbum());
 		toUpdate.setDuration(trackDTO.getDuration());
 		toUpdate.setLyrics(trackDTO.getLyrics());
-		toUpdate.setPlaylist(trackDTO.getPlaylist());
+		toUpdate.setPlaylists(trackDTO.getPlaylists());
 		BeanUtils.mergeNotNull(trackDTO, toUpdate);
 		Track updated = this.repo.save(toUpdate);
 		return this.mapToDTO(updated);

@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -50,7 +52,7 @@ class PlaylistControllerIntergrationTesting {
 	}
 
 	private final String URI = "/playlists";
-	
+
 	// Create test
 	@Test
 	void createTest() throws Exception {
@@ -60,9 +62,7 @@ class PlaylistControllerIntergrationTesting {
 		RequestBuilder request = post(URI + "/create").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isCreated();
-		
-		
-		
+
 		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Pop", "90's Pop"));
 		testSavedDTO.setId(2L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
@@ -76,15 +76,15 @@ class PlaylistControllerIntergrationTesting {
 	@Test
 	void updateTest() throws Exception {
 
-		List<Track> tracks = new ArrayList<>();
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist(1,"HipHop", "90's HipHop",tracks));
+		Set<Track> tracks = new HashSet<>();
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
 
 		RequestBuilder request = put(URI + "/update/1").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isAccepted();
-				
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist(1,"HipHop", "90's HipHop",tracks));
+
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", tracks));
 		testSavedDTO.setId(1L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
 
@@ -92,21 +92,21 @@ class PlaylistControllerIntergrationTesting {
 
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	// Read test
 	@Test
 	void updateRead1() throws Exception {
 
-		List<Track> tracks = new ArrayList<>();
+		Set<Track> tracks = new HashSet<>();
 
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock",tracks));
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
 
 		RequestBuilder request = get(URI + "/read/1").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock",tracks));
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		testSavedDTO.setId(1L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
 
@@ -115,13 +115,12 @@ class PlaylistControllerIntergrationTesting {
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 
 	}
-	
+
 	// Read All test
 	@Test
 	void updateReadAll() throws Exception {
-		List<Track> tracks = new ArrayList<>();
-
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock",tracks));
+		Set<Track> tracks = new HashSet<>();
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		List<PlaylistDTO> listDTO = new ArrayList<>();
 		listDTO.add(playlistDTO);
 
@@ -131,7 +130,7 @@ class PlaylistControllerIntergrationTesting {
 
 		ResultMatcher checkStatus = status().isOk();
 
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock",tracks));
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
 		List<PlaylistDTO> listSavedDTO = new ArrayList<>();
 		testSavedDTO.setId(1L);
 		listSavedDTO.add(testSavedDTO);
@@ -142,7 +141,7 @@ class PlaylistControllerIntergrationTesting {
 		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 
 	}
-	
+
 	// Delete test
 	@Test
 	void deleteTest() throws Exception {
