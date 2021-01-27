@@ -11,6 +11,8 @@ INSERT INTO genre (`name`, `description`) VALUES ('Country', 'Country and Folk m
 INSERT INTO playlist (`name`, `description`, `user_id`) VALUES ('Rockin', 'Rock around the Clock', 1);
 INSERT INTO playlist (`name`, `description`, `user_id`) VALUES ('Rock2', 'Rock again', 1);
 INSERT INTO playlist (`name`, `description`, `user_id`) VALUES ('Shanties', 'Traditional Sea Shanties', 1);
+INSERT INTO playlist (`name`, `description`, `user_id`) VALUES ('My Tracks', 'My favourite tracks by John', 2);
+INSERT INTO playlist (`name`, `description`, `user_id`) VALUES ('Janes playlist', 'Janes fave tracks', 2);
 INSERT INTO track (`name`, `duration`, `lyrics`, `album_id`, `artist_id`,`genre_id`) VALUES ('Jailhouse Rock', 156, 'The warden threw a party in the county jail', 1, 1, 1);
 INSERT INTO track (`name`, `duration`, `lyrics`, `album_id`, `artist_id`,`genre_id`) VALUES ('Hound Dog', 138, 'You aint nothin but a hound dog, Cryin all the time', 1, 1, 1);
 INSERT INTO track (`name`, `duration`, `lyrics`, `album_id`, `artist_id`,`genre_id`) VALUES ('Tutti Frutti', 119, 'A-bop-bop-a-loom-op a-lop-bop-boom, Tutti frutti au rutti', 1, 1, 1);
@@ -34,4 +36,10 @@ INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (1, 5);
 INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (1, 6);
 INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (3, 7);
 INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (3, 8);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (4, 5);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (4, 7);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (4, 9);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (5, 1);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (5, 8);
+INSERT INTO playlist_track (`playlist_id`, `track_id`) VALUES (5, 9);
 
