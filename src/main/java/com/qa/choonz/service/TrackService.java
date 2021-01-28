@@ -49,6 +49,7 @@ public class TrackService {
 		toUpdate.setName(trackDTO.getName());
 		toUpdate.setAlbum(trackDTO.getAlbum());
 		toUpdate.setDuration(trackDTO.getDuration());
+		toUpdate.setArtist(trackDTO.getArtist());
 		toUpdate.setLyrics(trackDTO.getLyrics());
 		toUpdate.setPlaylists(trackDTO.getPlaylists());
 		BeanUtils.mergeNotNull(trackDTO, toUpdate);
