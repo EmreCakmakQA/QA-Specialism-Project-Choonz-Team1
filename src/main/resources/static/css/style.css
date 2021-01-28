@@ -75,12 +75,12 @@ body {
   background-color: #3a423c;
   padding: 10px;
   border-radius: 20px;
-  display: flex;
+  /* display:table; */
   justify-content: center;
-  flex-direction: row;
+  /* flex-direction: row; */
   
 }
-
+/* 
 #card{
   padding: 30px;
   margin: 20px;
@@ -88,9 +88,7 @@ body {
   background-size: 300px 200px;
   border-radius: 10px;
   display: inline-block;
-  
-    
-}
+} */
 
 #playlistName{
   background-color: #3a423c; 

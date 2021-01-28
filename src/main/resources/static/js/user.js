@@ -1,6 +1,3 @@
-
-
-
 const params = new URLSearchParams(window.location.search);
 
 // Obtains ID and passes it as a parameter to getData()
