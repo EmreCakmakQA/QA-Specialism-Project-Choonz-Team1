@@ -2,12 +2,15 @@ const params = new URLSearchParams(window.location.search);
 
 // Obtains ID and passes it as a parameter to getData()
 for (let param of params) {
-    console.log("Object ID: " + param)
     let id = param[1];
-    console.log(id);
     getData(id)
 }
 
+// Captures data for later use in POST method
+let arr = []
+let playlistID;
+let playlistName;
+let playlistDesc;
 
 function getData(id) {
     fetch('http://localhost:8082/playlists/read/' + id)
@@ -18,11 +21,20 @@ function getData(id) {
                         response.status);
                     return;
                 }
-                // Examine the text in the response
                 response.json().then(function (data) {
                     console.log(data)
 
+                    // Assign playlist info for POST method later in code
+                    playlistID = data.id
+                    playlistName = data.name
+                    playlistDesc = data.description
+
                     displayPlaylist(data)
+
+                    // Pushes tracks objects to array
+                    for (let i = 0; i < data.tracks.length; i++) {
+                        arr.push(data.tracks[i])
+                    }
 
                 });
             }
@@ -54,22 +66,68 @@ function displayPlaylist(data) {
         track.innerText = trackName
 
         let btn = document.createElement("button")
+        let deleteBtn = document.createElement("button")
+
+        btn.innerText = "View"
+        deleteBtn.innerText = "Delete"
 
 
-        btn.innerText = "view"
+        // View Button
         btn.setAttribute("class", "btn btn-primary btn-sm")
         btn.onclick = () => {
-            console.log(data.tracks[i].id)
+
+            console.log("view")
             location.href = `individualTrack.html?id=${data.tracks[i].id}`
+        }
+
+        // Delete Button
+        deleteBtn.setAttribute("class", "btn btn-danger btn-sm")
+        deleteBtn.onclick = () => {
+
+            delete arr[i];
+
+            let dataToSend = {
+                "id": playlistID,
+                "name": playlistName,
+                "description": playlistDesc,
+                "tracks": arr
+            }
+            sendData(dataToSend)
+
+
         }
 
 
         list.appendChild(track)
         list.appendChild(btn)
+        list.appendChild(deleteBtn)
 
     }
 
     div.appendChild(list)
 
 }
+
+
+function sendData(data) {
+    fetch("http://localhost:8082/playlists/update/" + playlistID, {
+        method: 'put',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(function (data) {
+            console.log('Request succeeded with JSON response', data);
+            location.reload()
+
+
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+}
+
+
+
 

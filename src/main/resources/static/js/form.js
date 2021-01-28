@@ -1,17 +1,19 @@
-let objPeople = []    
+let objPeople = []
 
-function createUserArray (data) {
+function createUserArray(data) {
     for (let i = 0; i < data.length; i++) {
 
+        let id = data[i].id
         let username = data[i].name
         let password = data[i].password
-        console.log(username, password)
+        console.log(id, username, password)
         let user = {
-            "username" : username,
-            "password" : password
+            "id": id,
+            "username": username,
+            "password": password
         }
         objPeople.push(user)
-   
+
     }
 }
 
@@ -28,11 +30,11 @@ fetch('http://localhost:8082/users/read/')
             // Examine the text in the response
             response.json().then(function (data) {
 
-            console.log(data)    
-            //    displayData(data)
-            console.log("call createUserArray")
-            createUserArray (data)
-            console.log(objPeople)
+                console.log(data)
+                //    displayData(data)
+                console.log("call createUserArray")
+                createUserArray(data)
+                console.log(objPeople)
             });
         }
     )
@@ -59,12 +61,12 @@ document.addEventListener("submit", (e) => {
             success.setAttribute("class", "p-3 mb-2 bg-success text-white")
             div.appendChild(success)
             setTimeout(() => {
-                location.href = "/index.html";
+                location.href = "/html/user.html?id=" + objPeople[i].id;
             }, 3000);
             return
 
 
-        } else if (i == (objPeople.length-1) && (username != objPeople[i].username || password == objPeople[i].password)) {
+        } else if (i == (objPeople.length - 1) && (username != objPeople[i].username || password == objPeople[i].password)) {
 
             let success = document.createElement("p")
             success.innerText = "Incorrect password or username"
@@ -73,7 +75,7 @@ document.addEventListener("submit", (e) => {
             setTimeout(() => {
                 div.innerText = "";
             }, 3000);
-        } 
+        }
     }
 
 })
