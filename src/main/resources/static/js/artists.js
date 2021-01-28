@@ -43,9 +43,9 @@ function displayData(data) {
         console.log(artistName)
 
         let name = document.createElement("a");
-        // let id = data[i].id
-        // console.log(id)
-        // name.href = "html/individualArtist.html?id=" + id
+        let id = data[i].id
+        console.log(id)
+        name.href = "individualArtist.html?id=" + id
 
         let albumName = document.createElement("p")
 
