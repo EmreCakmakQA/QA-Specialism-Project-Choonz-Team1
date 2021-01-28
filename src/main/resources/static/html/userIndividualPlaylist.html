@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Choonz Tracks</title>
+    <title>Choonz Playlist</title>
 </head>
 
 <body>
@@ -43,25 +43,16 @@
 
     <!-- /main -->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg mt-5">
-                <form method="GET" id="form" class="form-inline d-flex justify-content-center md-form form-sm">
-                    <input id="trackName" class="form-control form-control-sm mr-1 w-75" type="text"
-                        placeholder="Search for music..." aria-label="Search" name="id">
-                    <button type="submit" id="Search"> Search </button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <h1 id="heading" class="heading"></h1>
 
-    <div class="container">
-        <h1 class="heading">Browse Our Featured Tracks</h1>
-        <div class="container" id="playlistCards"></div>
+    <div class="container" id="playlist">
+
     </div>
 
 
-    <script src="../js/tracks.js"></script>
+
+
+    <script src="../js/userIndividualPlaylist.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
