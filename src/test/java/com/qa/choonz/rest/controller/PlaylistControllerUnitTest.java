@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.choonz.persistence.domain.Playlist;
+import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.service.PlaylistService;
 
@@ -39,9 +40,11 @@ public class PlaylistControllerUnitTest {
 	}
 
 	// set up some data for use during test
-	private final Playlist TEST_PLAYLIST_1 = new Playlist(1L, "UK Top Ten", "Best UK songs", null);
-	private final Playlist TEST_PLAYLIST_2 = new Playlist(2L, "US Top Ten", "Best US songs", null);
-	private final Playlist TEST_PLAYLIST_3 = new Playlist(1L, "Indonesia Top Ten", "Best Indonesia songs", null);
+	private final User TEST_USER_1 = new User(1L, "DonGreen", "passwordDG");
+	private final Playlist TEST_PLAYLIST_1 = new Playlist(1L, "UK Top Ten", "Best UK songs", TEST_USER_1, null);
+	private final Playlist TEST_PLAYLIST_2 = new Playlist(2L, "US Top Ten", "Best US songs", TEST_USER_1, null);
+	private final Playlist TEST_PLAYLIST_3 = new Playlist(1L, "Indonesia Top Ten", "Best Indonesia songs", TEST_USER_1,
+			null);
 
 	private final List<Playlist> PLAYLIST_LIST = List.of(TEST_PLAYLIST_1, TEST_PLAYLIST_2, TEST_PLAYLIST_3);
 
@@ -102,7 +105,8 @@ public class PlaylistControllerUnitTest {
 	@Test // Test 6
 	void deleteTest2() throws Exception {
 		when(this.service.delete(TEST_PLAYLIST_1.getId())).thenReturn(true);
-		assertThat(this.controller.delete(TEST_PLAYLIST_1.getId())).isEqualTo(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+		assertThat(this.controller.delete(TEST_PLAYLIST_1.getId()))
+				.isEqualTo(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		verify(this.service, atLeastOnce()).delete(TEST_PLAYLIST_1.getId());
 	}
 

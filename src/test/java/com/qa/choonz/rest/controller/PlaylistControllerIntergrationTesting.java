@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.persistence.domain.Track;
+import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 
 @SpringBootTest
@@ -51,6 +52,10 @@ class PlaylistControllerIntergrationTesting {
 
 	private final String URI = "/playlists";
 
+	// set up some data for use during test
+	private final User TEST_USER_1 = new User(1L, "JohnSmith", "passwordJS");
+	List<Track> tracks = new ArrayList<>();
+
 	// Create test
 	@Test
 	void createTest() throws Exception {
@@ -74,15 +79,14 @@ class PlaylistControllerIntergrationTesting {
 	@Test
 	void updateTest() throws Exception {
 
-		List<Track> tracks = new ArrayList<>();
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", tracks));
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", TEST_USER_1, tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
 
 		RequestBuilder request = put(URI + "/update/1").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isAccepted();
 
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", tracks));
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist(1, "HipHop", "90's HipHop", TEST_USER_1, tracks));
 		testSavedDTO.setId(1L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
 
@@ -95,16 +99,14 @@ class PlaylistControllerIntergrationTesting {
 	@Test
 	void updateRead1() throws Exception {
 
-		List<Track> tracks = new ArrayList<>();
-
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", TEST_USER_1, tracks));
 		String testDTOAsJSON = this.jsonifier.writeValueAsString(playlistDTO);
 
 		RequestBuilder request = get(URI + "/read/1").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", TEST_USER_1, tracks));
 		testSavedDTO.setId(1L);
 		String testSavedDTOAsJSON = this.jsonifier.writeValueAsString(testSavedDTO);
 
@@ -117,8 +119,8 @@ class PlaylistControllerIntergrationTesting {
 	// Read All test
 	@Test
 	void updateReadAll() throws Exception {
-		List<Track> tracks = new ArrayList<>();
-		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
+
+		PlaylistDTO playlistDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", TEST_USER_1, tracks));
 		List<PlaylistDTO> listDTO = new ArrayList<>();
 		listDTO.add(playlistDTO);
 
@@ -128,7 +130,7 @@ class PlaylistControllerIntergrationTesting {
 
 		ResultMatcher checkStatus = status().isOk();
 
-		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", tracks));
+		PlaylistDTO testSavedDTO = mapToDTO(new Playlist("Rockin", "Rock around the Clock", TEST_USER_1, tracks));
 		List<PlaylistDTO> listSavedDTO = new ArrayList<>();
 		testSavedDTO.setId(1L);
 		listSavedDTO.add(testSavedDTO);
