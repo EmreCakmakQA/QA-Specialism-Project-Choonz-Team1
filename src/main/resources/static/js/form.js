@@ -61,7 +61,7 @@ document.addEventListener("submit", (e) => {
             success.setAttribute("class", "p-3 mb-2 bg-success text-white")
             div.appendChild(success)
             setTimeout(() => {
-                location.href = "/html/user.html?id=" + objPeople[i].id;
+                location.href = "user.html?id=" + objPeople[i].id;
             }, 3000);
             return
 
