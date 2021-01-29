@@ -1,129 +1,104 @@
 package com.qa.choonz.persistence.domain;
 
-import java.util.Objects;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Table(name = "track")
+@Data
+@NoArgsConstructor
 public class Track {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(unique = true)
-    private String name;
+	@NotNull
+	@Size(max = 100)
+	@Column(unique = true)
+	private String name;
 
-    @ManyToOne
-    private Album album;
+	@JsonIgnore
+	@ManyToOne
+	private Album album;
 
-    @ManyToOne
-    private Playlist playlist;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "tracks")
+	private List<Playlist> playlists;
 
-    // in seconds
-    private int duration;
+	@JsonIgnore
+	@ManyToOne
+	private Artist artist;
 
-    private String lyrics;
+	// in seconds
+	private int duration;
 
-    public Track() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	@JsonIgnore
+	@ManyToOne
+	private Genre genre;
 
-    public Track(long id, @NotNull @Size(max = 100) String name, Album album, Playlist playlist, int duration,
-            String lyrics) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.album = album;
-        this.playlist = playlist;
-        this.duration = duration;
-        this.lyrics = lyrics;
-    }
+	private String lyrics;
 
-    public long getId() {
-        return id;
-    }
+	public Track(long id, String name, Album album, List<Playlist> playlists, Artist artist, int duration, Genre genre,
+			String lyrics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.album = album;
+		this.playlists = playlists;
+		this.artist = artist;
+		this.duration = duration;
+		this.genre = genre;
+		this.lyrics = lyrics;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Track(String name, Album album, List<Playlist> playlists, Artist artist, int duration, Genre genre,
+			String lyrics) {
+		super();
+		this.name = name;
+		this.album = album;
+		this.playlists = playlists;
+		this.artist = artist;
+		this.duration = duration;
+		this.genre = genre;
+		this.lyrics = lyrics;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Track(long id, String name, int duration, String lyrics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Track(String name, int duration, String lyrics) {
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+	}
 
-    public Album getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
-
-    public Playlist getPlaylist() {
-        return playlist;
-    }
-
-    public void setPlaylist(Playlist playlist) {
-        this.playlist = playlist;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getLyrics() {
-        return lyrics;
-    }
-
-    public void setLyrics(String lyrics) {
-        this.lyrics = lyrics;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Track [id=").append(id).append(", name=").append(name).append(", album=").append(album)
-                .append(", playlist=").append(playlist).append(", duration=").append(duration).append(", lyrics=")
-                .append(lyrics).append("]");
-        return builder.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(album, duration, id, lyrics, name, playlist);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Track)) {
-            return false;
-        }
-        Track other = (Track) obj;
-        return Objects.equals(album, other.album) && duration == other.duration && id == other.id
-                && Objects.equals(lyrics, other.lyrics) && Objects.equals(name, other.name)
-                && Objects.equals(playlist, other.playlist);
-    }
+	public Track(String name, int duration, String lyrics, List<Playlist> playlists) {
+		super();
+		this.name = name;
+		this.duration = duration;
+		this.lyrics = lyrics;
+		this.playlists = playlists;
+	}
 
 }

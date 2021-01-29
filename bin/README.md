@@ -14,7 +14,6 @@ This should be scaleable from 3 to 5+ entities:
 
 ## Specifications
 
-
 These are TBD for now, but will be included here within a `_documentation` folder in due course.
 
 ## ERD
