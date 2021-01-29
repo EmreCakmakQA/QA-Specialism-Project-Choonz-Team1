@@ -4,7 +4,7 @@ const params = new URLSearchParams(window.location.search);
 for (let param of params) {
     console.log("Object ID: " + param)
     let id = param[1];
-    //console.log(id);
+    console.log(id);
     getData(id)
 }
 
@@ -22,6 +22,11 @@ function getData(id) {
                 // Examine the text in the response
                 response.json().then(function (data) {
                     //console.log(data)
+                    let link = document.createElement("a")
+                    link.setAttribute("id", "create")
+                    link.href = "./createPlaylist.html?=" + id
+                    link.innerText = "Create a new playlist"
+                    document.querySelector("p#createP").appendChild(link)
 
                     displayPlaylists(data.playlists)
 

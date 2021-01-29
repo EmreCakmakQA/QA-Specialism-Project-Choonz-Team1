@@ -1,64 +1,77 @@
-const params = new URLSearchParams(window.location.search);
+// const params = new URLSearchParams(window.location.search);
 
-// Obtains ID and passes it as a parameter to getData()
-for (let param of params) {
-    console.log("Object ID: " + param)
-    let id = param[1];
-    console.log(id);
-    getData(id)
-}
-
-
-function getData(id) {
-    fetch('http://localhost:8082/playlists/read/' + id)
-        .then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status);
-                    return;
-                }
-                // Examine the text in the response
-                response.json().then(function (data) {
-                    console.log(data)
-
-                    displayPlaylist(data)
-
-                });
-            }
-        )
-        .catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
-}
-
-function displayPlaylist(data) {
-
-    let div = document.querySelector("div#playlist")
-
-    let heading = document.querySelector("h1#heading")
-    heading.innerText = data.name
-
-    let desc = data.description
-    let description = document.createElement("p")
-    description.innerText = desc
-
-    div.appendChild(description)
-
-    let list = document.createElement("ul");
-
-    for (let i = 0; i < data.tracks.length; i++) {
-        trackName = data.tracks[i].name
-
-        let track = document.createElement("li")
-        track.innerText = trackName
+// // Obtains ID and passes it as a parameter to getData()
+// for (let param of params) {
+//     console.log("Object ID: " + param)
+//     let id = param[1];
+//     console.log(id);
+//     getData(id)
+// }
 
 
-        list.appendChild(track)
+// function getData(id) {
+//     fetch('http://localhost:8082/albums/read/' + id)
+//         .then(
+//             function (response) {
+//                 if (response.status !== 200) {
+//                     console.log('Looks like there was a problem. Status Code: ' +
+//                         response.status);
+//                     return;
+//                 }
+//                 // Examine the text in the response
+//                 response.json().then(function (data) {
+//                     console.log(data)
 
-    }
+//                     displayPlaylist(data)
 
-    div.appendChild(list)
+//                 });
+//             }
+//         )
+//         .catch(function (err) {
+//             console.log('Fetch Error :-S', err);
+//         });
+// }
 
-}
+
+// let rock = "../img/rock.png"
+
+
+// // Artist Read
+// fetch('http://localhost:8082/albums/read/')
+//     .then(
+//         function (response) {
+//             if (response.status !== 200) {
+//                 console.log('Looks like there was a problem. Status Code: ' +
+//                     response.status);
+//                 return;
+//             }
+
+//             // Examine the text in the response
+//             response.json().then(function (data) {
+//                 console.log(data)
+//                 displayData(data)
+//             });
+//         }
+//     )
+//     .catch(function (err) {
+//         console.log('Fetch Error :-S', err);
+//     });
+
+// function displayData(data) {
+//     let div = document.querySelector("div#albums")
+
+//     for (album of data) {
+
+
+//         let albumName = document.createElement("p")
+//         albumName.innerText
+
+//         let artist = document.createElement("p")
+//         artist.innerText = data.artist.name
+
+//     }
+//     div.appendChild(list)
+
+
+// }
 

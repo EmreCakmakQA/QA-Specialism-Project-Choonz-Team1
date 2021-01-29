@@ -1,70 +1,22 @@
 const params = new URLSearchParams(window.location.search);
+let userID;
+let userName;
+let userPassword;
+let playlistToSend;
 
 // Obtains ID and passes it as a parameter to getData()
 for (let param of params) {
     console.log("Object ID: " + param)
-    let id = param[1];
-    //console.log(id);
-    getData(id)
+    userID = param[1];
+    console.log(userID);
+    //getData(id)
 }
 
-
-
-fetch('http://localhost:8082/users/read/' + id)
-    .then(
-        function (response) {
-            if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                    response.status);
-                return;
-            }
-            // Examine the text in the response
-            response.json().then(function (data) {
-                //console.log(data)
-
-                //displayPlaylists(data.playlists)
-                userID = data.
-
-                });
-        }
-    )
-    .catch(function (err) {
-        console.log('Fetch Error :-S', err);
-    });
 
 
 
 let tracksArr = []
 let formOptions = document.querySelector("select#formOptions")
-
-
-
-// fetch('http://localhost:8082/tracks/read/')
-//     .then(
-//         function (response) {
-//             if (response.status !== 200) {
-//                 console.log('Looks like there was a problem. Status Code: ' +
-//                     response.status);
-//                 return;
-//             }
-
-//             // Examine the text in the response
-//             response.json().then(function (data) {
-//                 console.log(data)
-//                 // for (track of data) {
-//                 //     tracksArr.push(track)
-//                 //     let option = document.createElement("option")
-//                 //     option.innerText = track.name
-//                 //     formOptions.appendChild(option)
-
-//                 // }
-
-//             });
-//         }
-//     )
-//     .catch(function (err) {
-//         console.log('Fetch Error :-S', err);
-//     });
 
 
 
@@ -85,7 +37,9 @@ document
             "description": description
 
         }
-        console.log("Data to post", playlist)
+
+
+        //console.log("Data to post", playlist)
         sendData(playlist)
     });
 
@@ -99,8 +53,39 @@ function sendData(data) {
     })
         .then(function (data) {
             console.log('Request succeeded with JSON response', data);
-            //location.href = "html/user.html?id=" + id
-            console.log("vrtvtr")
+            console.log(userID)
+            let p = document.querySelector("p#success")
+            p.innerText = "Successfully created playlist"
+            p.setAttribute("class", "success")
+            readPlaylist(data)
+
+            readUser(userID)
+
+
+            console.log(playlistToSend)
+            //updatePlaylist(playlistToSend, playlistId)
+
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+}
+
+
+
+
+function updatePlaylist(playlist) {
+
+    fetch("http://localhost:8082/playlists/update/" + playlistToSend.id, {
+        method: 'put',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(playlist)
+    })
+        .then(function (data) {
+            // console.log('Request succeeded with JSON response', data);
+            // console.log("playlist created")
 
 
 
@@ -109,3 +94,68 @@ function sendData(data) {
             console.log('Request failed', error);
         });
 }
+
+
+function readPlaylist() {
+    fetch('http://localhost:8082/playlists/read/')
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+
+                // Examine the text in the response
+                response.json().then(function (data) {
+                    let playlist = data.slice(-1).pop()
+                    // console.log(playlist)
+                    // console.log(userID)
+
+                    playlistToSend = {
+                        "id": playlist.id,
+                        "name": playlist.name,
+                        "description": playlist.description,
+                        "user": {
+                            "id": userID,
+                            "name": userName,
+                            "password": userPassword
+                        },
+                        "tracks": []
+                    }
+
+                    return playlistToSend;
+
+
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+}
+
+function readUser(userID) {
+    fetch('http://localhost:8082/users/read/' + userID)
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+
+                // Examine the text in the response
+                response.json().then(function (data) {
+                    userName = data.name
+                    userPassword = data.password
+
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+}
+
+
