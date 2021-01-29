@@ -10,7 +10,7 @@ See specification document under Documentation folder...
 
 ## Installations
 
--   Jmeter Installation
+Jmeter Installation:
 
 -   Check you have Java installed with java -version
 
@@ -26,7 +26,8 @@ See specification document under Documentation folder...
 
 -   Check to see if everything works by navigating to your JMeter installation's bin folder and clicking jmeter.bat. If successful, the application should run:
 
--   Springtool Suite:
+
+Springtool Suite:
 
 -   Navigate to [the Spring Tools page](https://spring.io/tools), then click the relevant download for your system:
 
@@ -40,7 +41,8 @@ See specification document under Documentation folder...
 
 -   Go to File -> Open Projects From File Stream-> Browse your directories to find the Project
 
--   Vscode:
+
+Vscode:
 
 -   Navigate to <https://code.visualstudio.com/download> to download Vscode.
 
@@ -48,7 +50,8 @@ See specification document under Documentation folder...
 
 -   Open up your terminal and navigate to src/main/resources/static and type in "code ."
 
--   Maven:
+
+Maven:
 
 -   A Java version of 14.0.2 or higher is recommended
 
@@ -62,7 +65,8 @@ See specification document under Documentation folder...
 
 -   mvn install
 
--   SQL Local Installation:
+
+ SQL Local Installation:
 
 -   If you don't already have a local version of SQL installed go to the [MySQL Community Download page](https://dev.mysql.com/downloads/mysql/5.7.html) and download MySQL Installer for your operating system. Once finished extract the zip file to C:\Program Files\ on your machine
 
